@@ -18,7 +18,7 @@ bg_white=`tput setab 7`
 ng=`tput bold`
 reset=`tput sgr0`
 #echo "${red}red text ${green}green text${reset}"
-configfile='/home/uslu/Llayer_utils/sync.cfg'
+configfile='/home/uslu/AdsSync/sync.cfg'
 configfile_secured='/tmp/sync.cfg'
 
 # Elemento de seguridad previene el envenenamiento del archivo de configuracion
@@ -41,14 +41,14 @@ currpid=$$
 runpid=$(lsof -t $currsh| paste -s -d " ")
 if [[ $runpid == $currpid ]]
 then
-        touch /home/uslu/elements.lock
+        touch /home/uslu/AdsSync.lock
           ((sleep 3; echo "Ram OK") \
          & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p3113" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/Llayer_utils/updatelogs/$(date +%Y%m%d)_realt.log uxmal-ftp@uxm3.uxmalstream.com:{/home/$client_user/contenidos/ads,/home/$client_user/contenidos/assets,/home/$client_user/contenidos/floatingads,/home/$client_user/contenidos/parallelads,/home/$client_user/contenidos/pngads,} /home/uslu/uxmalstream/streamer/uploads/;
            do
                echo "Todo listo";
                exit;
            done )
-      rm /home/uslu/elements.lock
+      rm /home/uslu/AdsSync.lock
       exit;
 else
     echo -e "\nPID($runpid)($currpid) ::: At least one of \"$currsh\" is running !!!\n"
