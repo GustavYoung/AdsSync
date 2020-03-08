@@ -43,7 +43,7 @@ if [[ $runpid == $currpid ]]
 then
         touch /home/uslu/elements.lock
           ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p3113" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/Llayer_utils/updatelogs/$(date +%Y%m%d)_realt.log uxmal-ftp@uxm3.uxmalstream.com:{/home/$client_user/contenidos/ads,/home/$client_user/contenidos/assets,/home/$client_user/contenidos/floatingads,/home/$client_user/contenidos/parallelads,/home/$client_user/contenidos/pngads,} /home/uslu/elements/;
+         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p3113" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/Llayer_utils/updatelogs/$(date +%Y%m%d)_realt.log uxmal-ftp@uxm3.uxmalstream.com:{/home/$client_user/contenidos/ads,/home/$client_user/contenidos/assets,/home/$client_user/contenidos/floatingads,/home/$client_user/contenidos/parallelads,/home/$client_user/contenidos/pngads,} /home/uslu/uxmalstream/streamer/uploads/;
            do
                echo "Todo listo";
                exit;
