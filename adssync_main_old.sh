@@ -32,7 +32,7 @@ fi
 # Ahora con todo limpio se puede continuar :)
 . "$configfile"
 echo "Leyendo configuración" >&2
-echo "Version ${red}202${reset}" >&2
+echo "Version ${red}201${reset}" >&2
 echo "Usuario del cliente en FTP:${green} $client_user${reset}" >&2
 echo "Velocidad en kb/s: ${green}$ancho_banda${reset}" >&2
 
@@ -43,7 +43,7 @@ if [[ $runpid == $currpid ]]
 then
         touch /home/uslu/AdsSync.lock
           ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/ads,/home/uxm3/users/$client_user/contenidos/assets,/home/uxm3/users/$client_user/contenidos/floatingads,/home/uxm3/users/$client_user/contenidos/parallelads,/home/uxm3/users/$client_user/contenidos/pngads} /home/uslu/uxmalstream/streamer/uploads/;
+         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p3113" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxmal-ftp@uxm3.uxmalstream.com:{/home/$client_user/contenidos/ads,/home/$client_user/contenidos/assets,/home/$client_user/contenidos/floatingads,/home/$client_user/contenidos/parallelads,/home/$client_user/contenidos/pngads} /home/uslu/uxmalstream/streamer/uploads/;
            do
                echo "Todo listo";
                exit;
