@@ -44,7 +44,7 @@ if [[ $runpid == $currpid ]]
 then
         touch /home/uslu/elements.lock
           ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p3113" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/Llayer_utils/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/ /home/uslu/elements/;
+         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/Llayer_utils/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/ /home/uslu/elements/;
            do
                echo "Todo listo";
                exit;
