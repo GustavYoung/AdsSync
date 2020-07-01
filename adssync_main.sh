@@ -43,7 +43,7 @@ if [[ $runpid == $currpid ]]
 then
         touch /home/uslu/AdsSync.lock
           ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/ads,/home/uxm3/users/$client_user/contenidos/assets,/home/uxm3/users/$client_user/contenidos/floatingads,/home/uxm3/users/$client_user/contenidos/parallelads,/home/uxm3/users/$client_user/contenidos/pngads} /home/uslu/uxmalstream/streamer/uploads/;
+         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/parallelads,/home/uxm3/users/$client_user/contenidos/pngads} /home/uslu/uxmalstream/streamer/uploads{1,2};
            do
                echo "Todo listo";
                exit;
