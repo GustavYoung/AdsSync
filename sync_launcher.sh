@@ -18,7 +18,7 @@ while true; do
 else
         sudo bash /home/uslu/AdsSync/adssync_main.sh;
         date;
-        sleep 900;
+        sleep 600;
 #       done
 fi
 done
