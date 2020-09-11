@@ -21,6 +21,94 @@ reset=`tput sgr0`
 configfile='/home/uslu/AdsSync/sync.cfg'
 configfile_secured='/tmp/sync.cfg'
 
+#Variables para carpetas
+uxmal2_native='/home/uslu/uxmalstream/streamer/'
+uxmal2_mgrtd='/home/uslu/uxmal_2.0/'
+virtual_native='/home/uslu/uxmalstream/streamer/uploads/ads/ad1'
+virtual_mgrtd='/home/uslu/uxmal_2.0/uploads/ads/ad1'
+lv_imgflot_nat='/home/uslu/uxmalstream/streamer/uploads/floatingads'
+lv_imgflot_mgt='/home/uslu/uxmal_2.0/uploads/floatingads'
+target_fix='/home/uslu/uxmalstream/streamer/uploads'
+i_native=0
+i_native_ok=0
+i_mgrtd=0
+i_mgrtd_ok=0
+
+#Comprobacion de carpetas 10/09/2020
+if [ -d "$uxmal2_mgrtd" ]; then
+  echo "App migrada :S revisando foldets y link virtual"
+#Comprobacion de Link virtual memorias migradas.
+while [ $i_mgrtd_ok -lt 5 ]
+do
+  target_fix='/home/uslu/uxmal_2.0/uploads'
+  echo "Intentos: $i_mgrtd"
+  ((i_mgrtd++));
+  if [ ! -L "${virtual_mgrtd}" ]
+  then
+     echo "%ERROR: El link ${virtual_mgrtd} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmal_2.0/uploads/ads/ad1;
+     sudo ln -s /home/uslu/elements/Spots_con_audio/ /home/uslu/uxmal_2.0/uploads/ads/ad1;
+     else
+     echo "Link ad1 Valido!!!";
+     i_mgrtd_ok=11;
+  fi
+  if [ ! -L "${lv_imgflot_mgt}" ]
+  then
+     echo "%ERROR: El link ${lv_imgflot_mgt} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmal_2.0/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmal_2.0/uploads/floatingads;
+     else
+     echo "Link imagenes flotantes Valido!!!";
+     i_mgrtd_ok=11;
+  fi     
+  if [[ "$i_mgrtd_ok" == '11' ]]; then
+    break
+  fi
+done
+  clear;
+fi
+if [ -d "$uxmal2_native" ]; then
+  echo "App nativa :)";
+  #Comprobacion de Link virtual memorias nativas.
+while [ $i_native_ok -lt 5 ]
+do
+  target_fix='/home/uslu/uxmalstream/streamer/uploads'
+  echo "Intentos: $i_native"
+  ((i_native++));
+  if [ ! -L "${virtual_native}" ]
+  then
+     echo "%ERROR: El link ${virtual_native} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/ads/ad1;
+     sudo ln -s /home/uslu/elements/Spots_con_audio/ /home/uslu/uxmalstream/streamer/uploads/ads/ad1;
+     else
+     echo "Link ad1 Valido!!!";
+     i_native_ok=11;
+  fi
+  if [ ! -L "${lv_imgflot_nat}" ]
+  then
+     echo "%ERROR: El link ${lv_imgflot_nat} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/floatingads;
+     else
+     echo "Link imagenes flotantes Valido!!!";
+     i_mgrtd_ok=11;
+  fi      
+  if [[ "$i_native_ok" == '11' ]]; then
+    break
+  fi
+done
+  clear;
+fi
+
+# crea carpetas nuevas 
+
+mkdir $target_fix/parallelads/pl1/
+mkdir $target_fix/parallelads/pl1/defaultpngs/
+
 # Elemento de seguridad previene el envenenamiento del archivo de configuracion
 if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
     echo "El archivo de configuracion fue alterado, limpiando..." >&2
@@ -32,7 +120,7 @@ fi
 # Ahora con todo limpio se puede continuar :)
 . "$configfile"
 echo "Leyendo configuración" >&2
-echo "Version ${red}202${reset}" >&2
+echo "Version ${red}204 10/09/2020${reset}" >&2
 echo "Usuario del cliente en FTP:${green} $client_user${reset}" >&2
 echo "Velocidad en kb/s: ${green}$ancho_banda${reset}" >&2
 
@@ -42,10 +130,27 @@ runpid=$(lsof -t $currsh| paste -s -d " ")
 if [[ $runpid == $currpid ]]
 then
         touch /home/uslu/AdsSync.lock
-          ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/Spots_con_audio,/home/uxm3/users/$client_user/contenidos/Spots_sin_audio} /home/uslu/elements/;
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ /home/uslu/uxmalstream/streamer/uploads/parallelads/pl1/defaultpngs/;
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude 'defaultpng*' --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Video_chico/ /home/uslu/uxmalstream/streamer/uploads/parallelads/pl1/;
+        RC=1 
+        while [[ $RC -ne 0 ]]
+        do
+        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/Spots_con_audio,/home/uxm3/users/$client_user/contenidos/Spots_sin_audio,/home/uxm3/users/$client_user/contenidos/imagenes-flotantes} /home/uslu/elements/;
+        RC=$?
+        done
+        echo "Anuncios sin/con audio e imagenes flotantes OK";
+        RC=1 
+        while [[ $RC -ne 0 ]]
+        do
+        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/pl1/defaultpngs/;
+        RC=$?
+        done
+        echo "Banners OK";
+        RC=1 
+        while [[ $RC -ne 0 ]]
+        do
+        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude 'defaultpng*' --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Video_chico/ $target_fix/parallelads/pl1/;
+        RC=$?
+        done
+        echo "Video chico OK";
            do
             echo "Todo listo";
             exit;
