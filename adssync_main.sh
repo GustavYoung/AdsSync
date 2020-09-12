@@ -135,6 +135,9 @@ then
         do
         rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/Spots_con_audio,/home/uxm3/users/$client_user/contenidos/Spots_sin_audio,/home/uxm3/users/$client_user/contenidos/imagenes-flotantes} /home/uslu/elements/;
         RC=$?
+        if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
+        then RC=0
+        fi
         done
         echo "Anuncios sin/con audio e imagenes flotantes OK";
         RC=1 
@@ -142,6 +145,9 @@ then
         do
         rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/pl1/defaultpngs/;
         RC=$?
+        if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
+        then RC=0
+        fi
         done
         echo "Banners OK";
         RC=1 
@@ -149,9 +155,11 @@ then
         do
         rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude 'defaultpng*' --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Video_chico/ $target_fix/parallelads/pl1/;
         RC=$?
+        if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
+        then RC=0
+        fi
         done
         echo "Video chico OK";
-        do
         echo "Todo listo";
       rm /home/uslu/AdsSync.lock
       exit;
