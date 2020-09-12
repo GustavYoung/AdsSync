@@ -151,10 +151,8 @@ then
         RC=$?
         done
         echo "Video chico OK";
-           do
-            echo "Todo listo";
-            exit;
-           done )
+        do
+        echo "Todo listo";
       rm /home/uslu/AdsSync.lock
       exit;
 else
