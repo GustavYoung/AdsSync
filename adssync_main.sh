@@ -65,8 +65,6 @@ do
      echo "Link imagenes flotantes Valido!!!";
      i_mgrtd_ok=11;
   fi     
-  if [[ "$i_mgrtd_ok" == '11' ]]; then
-  fi
   if [ ! -L "${lv_adsflot_mgt}" ]
   then
      echo "%ERROR: El link ${lv_adsflot_mgt} no es valido!" >&2
@@ -111,8 +109,6 @@ do
      echo "Link imagenes flotantes Valido!!!";
      i_mgrtd_ok=11;
   fi      
-  if [[ "$i_native_ok" == '11' ]]; then
-  fi
   if [ ! -L "${lv_adsflot_nat}" ]
   then
      echo "%ERROR: El link ${lv_adsflot_nat} no es valido!" >&2
