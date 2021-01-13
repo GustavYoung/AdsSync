@@ -143,7 +143,7 @@ fi
 # Ahora con todo limpio se puede continuar :)
 . "$configfile"
 echo "Leyendo configuración" >&2
-echo "Version ${red}204 10/09/2020${reset}" >&2
+echo "Version ${red}205 13/01/2021${reset}" >&2
 echo "Usuario del cliente en FTP:${green} $client_user${reset}" >&2
 echo "Velocidad en kb/s: ${green}$ancho_banda${reset}" >&2
 
