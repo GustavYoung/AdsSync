@@ -162,6 +162,7 @@ then
         then RC=0
         fi
         done
+        echo " ";
         echo "Anuncios sin/con audio e imagenes flotantes OK";
         echo " ";
         RC=1 
@@ -173,6 +174,7 @@ then
         then RC=0
         fi
         done
+        echo " ";
         echo "Banners OK";
         echo " ";
         RC=1 
@@ -184,8 +186,10 @@ then
         then RC=0
         fi
         done
+        echo " ";
         echo "Video chico OK";
         echo "Todo listo";
+        echo " ";
       rm /home/uslu/AdsSync.lock
       exit;
 else
