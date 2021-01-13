@@ -163,6 +163,7 @@ then
         fi
         done
         echo "Anuncios sin/con audio e imagenes flotantes OK";
+        echo " ";
         RC=1 
         while [[ $RC -ne 0 ]]
         do
@@ -173,6 +174,7 @@ then
         fi
         done
         echo "Banners OK";
+        echo " ";
         RC=1 
         while [[ $RC -ne 0 ]]
         do
