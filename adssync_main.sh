@@ -66,7 +66,6 @@ do
      i_mgrtd_ok=11;
   fi     
   if [[ "$i_mgrtd_ok" == '11' ]]; then
-    break
   fi
   if [ ! -L "${lv_adsflot_mgt}" ]
   then
@@ -107,13 +106,12 @@ do
      echo "%ERROR: El link ${lv_imgflot_nat} no es valido!" >&2
      echo "Reparando link virtual"
      sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/floatingads;
-     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/pngngads;
+     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/pngads;
      else
      echo "Link imagenes flotantes Valido!!!";
      i_mgrtd_ok=11;
   fi      
   if [[ "$i_native_ok" == '11' ]]; then
-    break
   fi
   if [ ! -L "${lv_adsflot_nat}" ]
   then
