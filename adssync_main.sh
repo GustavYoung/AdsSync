@@ -26,8 +26,10 @@ uxmal2_native='/home/uslu/uxmalstream/streamer/'
 uxmal2_mgrtd='/home/uslu/uxmal_2.0/'
 virtual_native='/home/uslu/uxmalstream/streamer/uploads/ads/ad1'
 virtual_mgrtd='/home/uslu/uxmal_2.0/uploads/ads/ad1'
-lv_imgflot_nat='/home/uslu/uxmalstream/streamer/uploads/floatingads'
-lv_imgflot_mgt='/home/uslu/uxmal_2.0/uploads/floatingads'
+lv_imgflot_nat='/home/uslu/uxmalstream/streamer/uploads/pngads'
+lv_imgflot_mgt='/home/uslu/uxmal_2.0/uploads/pngads'
+lv_adsflot_nat='/home/uslu/uxmalstream/streamer/uploads/floatingads'
+lv_adsflot_mgt='/home/uslu/uxmal_2.0/uploads/floatingads'
 target_fix='/home/uslu/uxmalstream/streamer/uploads'
 i_native=0
 i_native_ok=0
@@ -58,7 +60,20 @@ do
      echo "%ERROR: El link ${lv_imgflot_mgt} no es valido!" >&2
      echo "Reparando link virtual"
      sudo rm -rf /home/uslu/uxmal_2.0/uploads/floatingads;
-     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmal_2.0/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmal_2.0/uploads/pngads;
+     else
+     echo "Link imagenes flotantes Valido!!!";
+     i_mgrtd_ok=11;
+  fi     
+  if [[ "$i_mgrtd_ok" == '11' ]]; then
+    break
+  fi
+  if [ ! -L "${lv_adsflot_mgt}" ]
+  then
+     echo "%ERROR: El link ${lv_adsflot_mgt} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmal_2.0/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/Spots_sin_audio/ /home/uslu/uxmal_2.0/uploads/floatingads;
      else
      echo "Link imagenes flotantes Valido!!!";
      i_mgrtd_ok=11;
@@ -92,7 +107,20 @@ do
      echo "%ERROR: El link ${lv_imgflot_nat} no es valido!" >&2
      echo "Reparando link virtual"
      sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/floatingads;
-     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/pngngads;
+     else
+     echo "Link imagenes flotantes Valido!!!";
+     i_mgrtd_ok=11;
+  fi      
+  if [[ "$i_native_ok" == '11' ]]; then
+    break
+  fi
+  if [ ! -L "${lv_adsflot_nat}" ]
+  then
+     echo "%ERROR: El link ${lv_adsflot_nat} no es valido!" >&2
+     echo "Reparando link virtual"
+     sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/floatingads;
+     sudo ln -s /home/uslu/elements/Spots_sin_audio/ /home/uslu/uxmalstream/streamer/uploads/floatingads;
      else
      echo "Link imagenes flotantes Valido!!!";
      i_mgrtd_ok=11;
@@ -108,6 +136,7 @@ fi
 
 mkdir $target_fix/parallelads/pl1/
 mkdir $target_fix/parallelads/pl1/defaultpngs/
+clear;
 
 # Elemento de seguridad previene el envenenamiento del archivo de configuracion
 if egrep -q -v '^#|^[^ ]*=[^;]*' "$configfile"; then
