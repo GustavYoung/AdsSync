@@ -59,7 +59,7 @@ do
   then
      echo "%ERROR: El link ${lv_imgflot_mgt} no es valido!" >&2
      echo "Reparando link virtual"
-     sudo rm -rf /home/uslu/uxmal_2.0/uploads/floatingads;
+     sudo rm -rf /home/uslu/uxmal_2.0/uploads/pngads;
      sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmal_2.0/uploads/pngads;
      else
      echo "Link imagenes flotantes Valido!!!";
@@ -103,7 +103,7 @@ do
   then
      echo "%ERROR: El link ${lv_imgflot_nat} no es valido!" >&2
      echo "Reparando link virtual"
-     sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/floatingads;
+     sudo rm -rf /home/uslu/uxmalstream/streamer/uploads/pngads;
      sudo ln -s /home/uslu/elements/imagenes-flotantes/ /home/uslu/uxmalstream/streamer/uploads/pngads;
      else
      echo "Link imagenes flotantes Valido!!!";
