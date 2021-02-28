@@ -41,15 +41,22 @@ currpid=$$
 runpid=$(lsof -t $currsh| paste -s -d " ")
 if [[ $runpid == $currpid ]]
 then
-        touch /home/uslu/realtime.lock
-          ((sleep 3; echo "Ram OK") \
-         & while !  rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit=1000 --delete --progress --log-file=/home/uslu/gstool/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/ftp/ /home/uslu/gsign/imgs/dia/;
-           do
-               echo "Todo listo";
-               exit;
-           done )
-      rm /home/uslu/realtime.lock
-      exit;
+    touch /home/uslu/realtime.lock
+    RC=1 
+    while [[ $RC -ne 0 ]]
+    do
+    rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit=1000 --delete --progress --log-file=/home/uslu/gstool/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/ftp/ /home/uslu/gsign/imgs/dia/;
+    RC=$?
+    if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
+    then
+    sleep 30
+    RC=0
+    fi
+    done
+    echo " ";
+    echo "Todo listo";
+    echo " ";
+    exit;
 else
     echo -e "\nPID($runpid)($currpid) ::: At least one of \"$currsh\" is running !!!\n"
     false
