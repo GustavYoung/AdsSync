@@ -184,6 +184,21 @@ then
         echo "Banners OK";
         rm /home/uslu/AdsSync/updatelogs/realt.log
         echo " ";
+        RC=1
+        while [[ $RC -ne 0 ]]
+        do
+        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/defaultpngs/;
+        RC=$?
+        if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
+        then
+        sleep 20
+        RC=0
+        fi
+        done
+        echo " ";
+        echo "Banners 2 OK";
+        rm /home/uslu/AdsSync/updatelogs/realt.log
+        echo " ";
         RC=1 
         while [[ $RC -ne 0 ]]
         do
