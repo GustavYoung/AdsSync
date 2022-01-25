@@ -14,7 +14,7 @@ SERVICE="Elements_v7_launch";
 while true; do
         if ps ax | grep -v grep | grep $SERVICE > /dev/null
         then
-        sleep 1;
+        sleep 10;
 else
         sudo bash /home/uslu/AdsSync/adssync_main.sh;
         date;

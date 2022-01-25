@@ -157,7 +157,7 @@ then
         RC=1 
         while [[ $RC -ne 0 ]]
         do
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/Spots_con_audio,/home/uxm3/users/$client_user/contenidos/Spots_sin_audio,/home/uxm3/users/$client_user/contenidos/imagenes-flotantes} /home/uslu/elements/;
+        rsync -avh -e "ssh -o StrictHostKeyChecking=no -i /home/uslu/.ssh/id_rsa -p65520" --exclude "*.m3u" --exclude "/home/uslu/uxmalstream/streamer/uploads/genres" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:{/home/uxm3/users/$client_user/contenidos/Spots_con_audio,/home/uxm3/users/$client_user/contenidos/Spots_sin_audio,/home/uxm3/users/$client_user/contenidos/imagenes-flotantes} /home/uslu/elements/;
         RC=$?
         if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
         then
@@ -172,7 +172,7 @@ then
         RC=1
         while [[ $RC -ne 0 ]]
         do
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/pl1/defaultpngs/;
+        rsync -avh -e "ssh -o StrictHostKeyChecking=no -i /home/uslu/.ssh/id_rsa -p65520" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/pl1/defaultpngs/;
         RC=$?
         if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
         then
@@ -187,7 +187,7 @@ then
         RC=1
         while [[ $RC -ne 0 ]]
         do
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/defaultpngs/;
+        rsync -avh -e "ssh -o StrictHostKeyChecking=no -i /home/uslu/.ssh/id_rsa -p65520" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Banners/ $target_fix/parallelads/defaultpngs/;
         RC=$?
         if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
         then
@@ -202,7 +202,7 @@ then
         RC=1 
         while [[ $RC -ne 0 ]]
         do
-        rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --exclude 'defaultpng*' --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Video_chico/ $target_fix/parallelads/pl1/;
+        rsync -avh -e "ssh -o StrictHostKeyChecking=no -i /home/uslu/.ssh/id_rsa -p65520" --exclude "*.m3u" --exclude 'defaultpng*' --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit="$ancho_banda" --delete --progress --log-file=/home/uslu/AdsSync/updatelogs/realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/contenidos/Video_chico/ $target_fix/parallelads/pl1/;
         RC=$?
         if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
         then

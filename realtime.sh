@@ -45,7 +45,7 @@ then
     RC=1 
     while [[ $RC -ne 0 ]]
     do
-    rsync -avh -e "ssh -i /home/uslu/.ssh/id_rsa -p65522" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit=1000 --delete --progress --log-file=/home/uslu/gstool/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/ftp/ /home/uslu/gsign/imgs/dia/;
+    rsync -avh -e "ssh -o StrictHostKeyChecking=no -i /home/uslu/.ssh/id_rsa -p65520" --exclude "*.m3u" --include-from "/home/uslu/gstool/extensions.dll" --partial --bwlimit=1000 --delete --progress --log-file=/home/uslu/gstool/updatelogs/$(date +%Y%m%d)_realt.log uxm3@uxmde.uxmalstream.com:/home/uxm3/users/$client_user/ftp/ /home/uslu/gsign/imgs/dia/;
     RC=$?
     if [[ $RC -eq 23  ]] || [[ $RC -eq 20 ]]
     then
